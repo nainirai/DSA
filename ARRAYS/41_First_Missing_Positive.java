@@ -1,5 +1,8 @@
 class Solution {
     public int firstMissingPositive(int[] nums) {
+         if (nums == null || nums.length == 0) {
+            return 1;
+        }
          int n=nums.length;
         int ans=n+1;
         int vis[]=new int[n+1];
