@@ -1,3 +1,5 @@
+// PREFIX SUFFIX SUM O(N) WITH SPACE O(N)
+
 public int[] productExceptSelf(int[] nums) {
         int n=nums.length;
         int left[]=new int[n];
