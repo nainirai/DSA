@@ -1,0 +1,19 @@
+public int diameterOfBinaryTree(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+            int ld=diameterOfBinaryTree(root.left);
+            int lh=height(root.left);
+            int rd=diameterOfBinaryTree(root.right);
+            int rh=height(root.right);
+            return Math.max(Math.max(ld,rd),(lh+rh));    
+            // we take lh+rh instead of lh+rh+1 as in question its given that the length of path between two nodes is represented by the number of edges between them.  
+    }
+    public static int height(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+        int lh=height(root.left);
+        int rh=height(root.right);
+        return Math.max(lh,rh)+1;
+    }
