@@ -27,15 +27,15 @@ class Solution
         while(!q.isEmpty()){
             Info currNode = q.remove();
             map.put(currNode.hd, currNode.node.data);
-            if(currNode==null){
-                if(q.isEmpty()){
-                    break;
-                }
-                else{
-                    q.add(null);
-                }
-            }
-            else{
+            // if(currNode==null){
+            //     if(q.isEmpty()){
+            //         break;
+            //     }
+            //     else{
+            //         q.add(null);
+            //     }
+            // }
+            // else{
                 if(currNode.node.left!=null){
                     q.add(new Info(currNode.hd-1,currNode.node.left));
                     min = Math.min(min,currNode.hd-1);
@@ -44,7 +44,7 @@ class Solution
                     q.add(new Info(currNode.hd+1,currNode.node.right));
                     max = Math.max(max,currNode.hd+1);
                 }
-            }
+            // }
         }
         for(Map.Entry<Integer,Integer> entry : map.entrySet()){
             ans.add(entry.getValue());
