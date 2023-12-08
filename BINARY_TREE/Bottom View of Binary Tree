@@ -1,0 +1,56 @@
+class Solution
+{
+    class Info{
+        int hd;
+        Node node;
+        public Info(int hd, Node node){
+            this.hd= hd;
+            this.node=node;
+        }
+    }
+    //Function to return a list containing the bottom view of the given tree.
+    //  using BFS, Level order , a queue, and map .
+    public ArrayList <Integer> bottomView(Node root)
+    {
+        ArrayList<Integer> ans= new ArrayList<>();
+        if(root == null){
+            return ans;
+        }
+        int max=Integer.MIN_VALUE, min = Integer.MAX_VALUE;
+        Queue<Info> q = new LinkedList<>();
+        HashMap<Integer,Integer> map = new HashMap<>();
+        // In level order traversal, we use Queue(BSF) which works on FIFO
+        // add root and its index in queue 
+        q.add(new Info(0,root));
+        q.add(null);
+        
+        while(!q.isEmpty()){
+            Info currNode = q.remove();
+            map.put(currNode.hd, currNode.node.data);
+            if(currNode==null){
+                if(q.isEmpty()){
+                    break;
+                }
+                else{
+                    q.add(null);
+                }
+            }
+            else{
+                if(currNode.node.left!=null){
+                    q.add(new Info(currNode.hd-1,currNode.node.left));
+                    min = Math.min(min,currNode.hd-1);
+                }
+                if(currNode.node.right!=null){
+                    q.add(new Info(currNode.hd+1,currNode.node.right));
+                    max = Math.max(max,currNode.hd+1);
+                }
+            }
+        }
+        for(Map.Entry<Integer,Integer> entry : map.entrySet()){
+            ans.add(entry.getValue());
+        }
+        return ans;
+        
+        
+    }
+}
