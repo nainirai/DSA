@@ -1,0 +1,43 @@
+public class Solution {
+    public class Info{
+        boolean isBST;
+        int size;
+        int min;
+        int max;
+        public Info(boolean isBST, int size, int min, int max){
+            this.isBST = isBST;
+            this.size = size;
+            this.min= min;
+            this.max=max;
+        }
+    }
+    public static int maxBST = 0;
+    public static int largestBST(TreeNode root) {
+         if (root == null){
+             return 0;
+         }
+         int maxSize = BST(root);
+         return maxSize;
+    }
+        
+    public static Info BST(TreeNode root) {
+        if(root == null){
+            return new Info(true, 0, Integer.MAX_VALUE, Integer.MIN_VALUE);
+        }
+        Info leftInfo = BST(root.left);
+        Info rightInfo = BST(root.right);
+        int size = leftInfo.size + rightInfo.size + 1;
+        int currMin = Math.min(root.data, Math.min(lefInfo.min, rightInfo.min));
+        int currMax = Math.max(root.data, Math.max(leftInfo.max, rightInfo.max));
+
+        if(leftInfo.max >= root.data || rightInfo.min <= root.data){
+             return new Info(false, size, currMin, currMax);
+        }
+        if(leftInfo.isBST && rightInfo.isBST){
+            maxBST = Math.max(maxBST,size);
+            return new Info(true, size,currMin, currMax);
+        }
+         return new Info(false, size, currMin, currMax);
+    }   
+
+}
