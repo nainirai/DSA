@@ -1,0 +1,52 @@
+import java.util.List;
+import java.util.ArrayList;
+public class Solution {
+    public static List<Integer> mergeBST(TreeNode root1, TreeNode root2) {
+        if(root1 == null && root2 == null){
+             return null;
+        }
+    // create merge2BST arraylist to store final answer 
+        ArrayList<Integer> merge2BST = new ArrayList<>();
+
+    // create arr1 to store the inorder sorted sequence of root1
+        ArrayList<Integer> arr1 = new ArrayList<>();
+        inOrder(root1, arr1);
+
+    // create arr2 to store the inorder sorted sequence of root1  
+        ArrayList<Integer> arr2 = new ArrayList<>();
+        inOrder(root2, arr2);
+
+    // merging arr1 and arr2 to get final sorted arraylist in merge2BST 
+        int l=0,r=0;
+        while(l<arr1.size() && r<arr2.size()){
+            if(arr1.get(l)<=arr2.get(r)){
+                merge2BST.add(arr1.get(l));
+                l++;
+            }
+            else{
+                merge2BST.add(arr2.get(r));
+                r++;
+            }
+        }
+    //when elements in arr1 is left to fill in merge2BST
+        while(l<arr1.size()){
+            merge2BST.add(arr1.get(l));
+            l++;
+        }
+    //when elements in arr2 is left to fill in merge2BST    
+        while(r<arr2.size()){
+            merge2BST.add(arr2.get(r));
+            r++;
+        }
+        return merge2BST;
+    }
+    public static void inOrder(TreeNode root, ArrayList<Integer> list){
+        // ArrayList<Integer> list = new ArrayList<>();   
+        if(root == null){
+            return;
+        }
+        inOrder(root.left, list);
+        list.add(root.data);
+        inOrder(root.right, list);
+    }
+}
