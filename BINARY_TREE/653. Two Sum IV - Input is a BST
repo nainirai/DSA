@@ -1,0 +1,29 @@
+// import java.util.ArrayList;
+class Solution {
+    public boolean findTarget(TreeNode root, int k) {
+        
+        ArrayList<Integer> ans = new ArrayList<>();
+        inOrder(root, ans);
+        int l=0, r=ans.size()-1;
+        while(l<r){
+            if(ans.get(l)+ans.get(r)==k){
+                return true;
+            }
+            else if(ans.get(l)+ans.get(r)<k){
+                l++;
+            }
+            else{
+                r--;
+            }
+        }
+        return false;
+    }
+    public static void inOrder(TreeNode root, List<Integer> list){
+        if(root == null){
+            return;
+        }
+        inOrder(root.left, list);
+        list.add(root.val);
+        inOrder(root.right, list);
+    }
+}
